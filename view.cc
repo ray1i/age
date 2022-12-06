@@ -1,9 +1,14 @@
 #include <ncurses.h>
+#include <string>
 #include "view.h"
 #include "state.h"
+#include "entity.h"
+#include "entityform.h"
+
+using std::string;
 
 namespace cs246e {
-    View::View(): rows{25}, cols{80} {}
+    View::View(): rows{22}, cols{80} {}
     View::~View() {
         endwin();
     }
@@ -16,9 +21,10 @@ namespace cs246e {
     }
     void View::drawAll(const State &state) {
         refresh();
+        clear();
         drawBorders();
         drawState(state);
-        getch();
+        // getch();
     }
     void View::drawBorders() {
         // draw corners:
@@ -37,9 +43,22 @@ namespace cs246e {
             mvwaddch(stdscr, i, cols - 1, '|');
         }
     }
+    void View::drawEntity(const Entity *e) {
+        const EntityForm currForm = e->getCurrForm();
+        for (auto c: currForm.theForm) {
+            mvwaddch(stdscr, c.y, c.x, c.sprite);
+            // string s = "" + std::to_string(c.x) + std::to_string(c.y);
+            // mvprintw(27, 0, s.c_str());
+        }
+    }
+    void View::drawStatuses(const string s1, const string s2, const string s3) {
+        // print statuses:
+        mvprintw(rows, 0, s1.c_str());
+        mvprintw(rows + 1, 0, s2.c_str());
+        mvprintw(rows + 2, 0, s3.c_str());
+    }
     void View::drawState(const State &state) {
-        mvprintw(rows, 0, state.status1.c_str());
-        mvprintw(rows + 1, 0, state.status2.c_str());
-        mvprintw(rows + 2, 0, state.status3.c_str());
+        for (auto e: state.entities) drawEntity(e);
+        drawStatuses(state.status1, state.status2, state.status3);
     }
 }

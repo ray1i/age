@@ -1,7 +1,11 @@
 #ifndef _VIEW_H_
 #define _VIEW_H_
 
+#include <string>
 #include "state.h"
+#include "entity.h"
+
+using std::string;
 
 namespace cs246e {
     class View {
@@ -17,6 +21,8 @@ namespace cs246e {
         void initDraw();
         void drawAll(const State &state);
         void drawBorders();
+        void drawEntity(const Entity *e);
+        void drawStatuses(const string s1, const string s2, const string s3);
         void drawState(const State &state);
     };
 }

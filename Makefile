@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -lncurses -g
 EXEC = age-test
-OBJECTS = age-test.o engine.o view.o model.o
+OBJECTS = age-test.o engine.o view.o model.o entity.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
