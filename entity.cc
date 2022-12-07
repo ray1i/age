@@ -19,6 +19,11 @@ namespace cs246e {
         return form;
     }
     void Entity::update() {
+        // update entity form
+        ++formIndex;
+        if (formIndex >= forms.size()) formIndex = 0;
+
+        // update entity position
         for (auto m: movements) {
             x += m.slopeX;
             y += m.slopeY;

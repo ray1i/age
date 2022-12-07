@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "cell.h"
+// TODO: use initializer list
 
 // REMOVE:
 #include <iostream>
