@@ -25,7 +25,9 @@ namespace cs246e {
     }
 
     void CursesView::drawChar(size_t x, size_t y, char c) {
-        if (0 <= x && x <= COLS && 0 <= y && y <= ROWS) { mvwaddch(stdscr, y, x, c); }
+        // if (0 <= x && x <= COLS && 0 <= y && y <= ROWS) {
+            mvwaddch(stdscr, y, x, c);
+        // }
     }
 
     // whichStatus is 0, 1, 2

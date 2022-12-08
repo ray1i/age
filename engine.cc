@@ -15,6 +15,11 @@ namespace cs246e {
     void Engine::init() {
         theView->initDraw();
     }
+
+    // TODO:
+    // void Engine::go() {
+    //     init();
+    // }
     
     void Engine::addEntity(const Entity &e) { theModel->addEntity(e); }
 

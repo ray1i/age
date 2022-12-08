@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "cell.h"
+#include "constants.h"
 // TODO: use initializer list
 
 // REMOVE:
@@ -22,6 +23,15 @@ struct EntityForm {
             c.x += x;
             c.y += y;
         }
+    }
+
+    bool offScreen() const { // check if entity is COMPLETELY offscreen
+        for (auto c: theForm) {
+            if ((0 <= c.x && c.x < COLS) && (0 <= c.y && c.y < ROWS)) {
+                return false;
+            }
+        }
+        return true;
     }
 };
 

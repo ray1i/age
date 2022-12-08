@@ -2,9 +2,7 @@
 #define _CURSESVIEW_H_
 
 #include <string>
-
-#define ROWS 22
-#define COLS 80
+#include "constants.h"
 
 namespace cs246e {
     class CursesView {

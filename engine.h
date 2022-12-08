@@ -16,6 +16,8 @@ namespace cs246e {
         // Engine &operator=(const Engine) = delete;
 
         void init();
+        // TODO:
+        // void go();
 
         void addEntity(const Entity &e);
     // private:
