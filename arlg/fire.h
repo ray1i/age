@@ -1,11 +1,15 @@
-#include <vector>
+#ifndef __FIRE_H
+#define __FIRE_H
+
 #include "../entity.h"
-#include "../entityform.h"
-#include "../movement.h"
+
+class Bullet;
 
 class Fire: public cs246e::Entity {
 public:
-    Fire(float x, float y):
-        Entity(x, y, 0, std::vector<EntityForm>{EntityForm(0, 0, 'x'), EntityForm(0, 0, 'X')}, 0, std::vector<Movement>()) {}
+    Fire(float x, float y);
+
+    void collideInto(Entity &e) override {};
 };
 
+#endif

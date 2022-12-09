@@ -12,12 +12,10 @@ int main() {
 
     cs246e::Engine engine = cs246e::Engine();
 
-    Bullet bullet = Bullet(20, 10, 1, 0);
-    Fire fire = Fire(40, 10);
 
     engine.init();
-    engine.addEntity(bullet);
-    engine.addEntity(fire);
+    engine.addEntity(new Bullet(20, 10, 1, 0));
+    engine.addEntity(new Fire(40, 10));
     while (true) {
         engine.update();
         std::this_thread::sleep_for(std::chrono::milliseconds(interval));

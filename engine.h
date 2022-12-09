@@ -19,7 +19,7 @@ namespace cs246e {
         // TODO:
         // void go();
 
-        void addEntity(const Entity &e);
+        void addEntity(Entity *e);
     // private:
         void update();
     };

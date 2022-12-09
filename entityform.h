@@ -33,6 +33,8 @@ struct EntityForm {
         }
         return true;
     }
+
+    // TODO: add iterator?
 };
 
 #endif

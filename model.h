@@ -13,10 +13,15 @@ namespace cs246e {
         std::string status1, status2, status3;
     public:
         const State getState();
-        void addEntity(const Entity &e);
+        void addEntity(Entity *e);
         void removeEntity(Entity *e);
-        void removeMarkedEntities();
+
         void update(); // TODO: take string arg for controller
+    private:
+        void removeMarkedEntities();
+        void updateAllEntities();
+        void checkForCollisions();
+        void performEntityCollisions();
     };
 }
 #endif

@@ -21,7 +21,7 @@ namespace cs246e {
     //     init();
     // }
     
-    void Engine::addEntity(const Entity &e) { theModel->addEntity(e); }
+    void Engine::addEntity(Entity *e) { theModel->addEntity(e); }
 
     void Engine::update() {
         // TODO: take controller input
