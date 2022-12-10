@@ -3,13 +3,9 @@
 
 #include <vector>
 #include "cell.h"
-#include "constants.h"
+#include "../constants.h"
+#include "../border.h"
 // TODO: use initializer list
-
-// REMOVE:
-#include <iostream>
-using std::cout;
-using std::endl;
 
 struct EntityForm {
     std::vector<Cell> theForm;
@@ -27,11 +23,23 @@ struct EntityForm {
 
     bool offScreen() const { // check if entity is COMPLETELY offscreen
         for (auto c: theForm) {
-            if ((0 <= c.x && c.x < COLS) && (0 <= c.y && c.y < ROWS)) {
+            if ((0 <= c.x && c.x < COLUMNS) && (0 <= c.y && c.y < ROWS)) {
                 return false;
             }
         }
         return true;
+    }
+
+    bool collidesWithBorder(const BorderDirection dir) const {
+        for (auto c: theForm) {
+            if ((c.y == 0 && dir == NORTH) ||
+                (c.x == COLUMNS - 1 && dir == EAST) ||
+                (c.y == ROWS - 1 && dir == SOUTH) ||
+                (c.x == 0 && dir == WEST)){
+                    return true;
+                }
+        }
+        return false;
     }
 
     // TODO: add iterator?

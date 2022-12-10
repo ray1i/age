@@ -3,7 +3,7 @@
 
 #include <string>
 #include <set>
-#include "entity.h"
+#include "entity/entity.h"
 
 struct State {
     std::set<cs246e::Entity*> entities;
