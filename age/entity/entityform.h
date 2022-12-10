@@ -2,17 +2,45 @@
 #define _ENTITYFORM_H_
 
 #include <vector>
+#include <string>
 #include "cell.h"
 #include "../constants.h"
 #include "../border.h"
-// TODO: use initializer list
 
 struct EntityForm {
     std::vector<Cell> theForm;
 
-    EntityForm(std::vector<Cell> forms): theForm{forms} {}
-    EntityForm(Cell c): theForm{std::vector<Cell>{c}} {}
-    EntityForm(int x, int y, char c): theForm{std::vector<Cell>{Cell{x, y, c}}} {}
+    // single character
+    EntityForm(char c): theForm{std::vector<Cell>({Cell{0, 0, c}})} {}
+
+    // bitmap
+    EntityForm(std::string sprite): theForm{std::vector<Cell>()} {
+        int x = 0;
+        int y = 0;
+        for (const auto &c: sprite) {
+            if (c == ' ') ++x;
+            else if (c == '\n') {
+                ++y;
+                x = 0;
+            } else {
+                theForm.push_back(Cell{x, y, c});
+                ++x;
+            }
+        }
+    }
+
+    // rectangle
+    EntityForm(int width, int height, char c): theForm{std::vector<Cell>()} {
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                theForm.push_back(Cell{x, y, c});
+            }
+        }
+    }
+
+    // EntityForm(std::vector<Cell> forms): theForm{forms} {}
+    // EntityForm(Cell c): theForm{std::vector<Cell>{c}} {}
+    // EntityForm(int x, int y, char c): theForm{std::vector<Cell>{Cell{x, y, c}}} {}
 
     void move(float x, float y) {
         for (auto &c: theForm) {

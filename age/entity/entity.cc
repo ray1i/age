@@ -10,7 +10,7 @@ namespace cs246e {
         forms{forms}, formIndex{formIndex}, movements{movements} {}
 
     const EntityForm Entity::getCurrForm() const {
-        EntityForm form = EntityForm(forms[formIndex].theForm);
+        EntityForm form = forms[formIndex];
         form.move(x, y);
         return form;
     }

@@ -1,15 +1,14 @@
 #include <vector>
 #include "player.h"
-#include "../userControlledEntity.h"
-#include "../entityform.h"
-#include "../movement.h"
 
 #include "arlgActions.h"
 #include "arlgConstants.h"
 #include "bullet.h"
 
 Player::Player(float x, float y):
-    UserControlledEntity(PLAYER, x, y, 0, std::vector<EntityForm>{EntityForm(0, 0, 'p')}, 0, std::vector<Movement>()) {}
+    UserControlledEntity(PLAYER, x, y, 0,
+    std::vector<EntityForm>{EntityForm("p")}, 0,
+    std::vector<Movement>()) {}
 
 void Player::collideInto(Entity &e) {
 }
