@@ -7,7 +7,8 @@ OBJECTS = arlg.o \
 		age/model/model.o age/entity/entity.o age/entity/userControlledEntity.o \
 		arlg/arlgModel.o arlg/arlgController.o \
 		arlg/entities/player.o arlg/entities/bullet.o arlg/entities/fire.o arlg/entities/health.o \
-		arlg/entities/entityWithHealth.o arlg/entities/walker.o
+		arlg/entities/entityWithHealth.o arlg/entities/walker.o \
+		arlg/entities/exitLocked.o arlg/entities/exitUnlocked.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

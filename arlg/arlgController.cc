@@ -1,7 +1,7 @@
 #include "arlgController.h"
-#include <iostream>
 
-ArlgController::ArlgController() {
+ArlgController::ArlgController():
+    cs246e::CursesController() {
     mapping[KEY_UP] = Action::MOVE_UP;
     mapping[KEY_LEFT] = Action::MOVE_LEFT;
     mapping[KEY_RIGHT] = Action::MOVE_RIGHT;

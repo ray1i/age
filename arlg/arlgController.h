@@ -2,7 +2,6 @@
 #define __ARLG_CONTROLLER_H
 
 #include <map>
-#include <string>
 #include "../age/controller/cursesController.h"
 #include "arlgActions.h"
 

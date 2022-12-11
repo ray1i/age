@@ -12,13 +12,14 @@ namespace cs246e {
     class Controller;
 
     class Model {
-        // std::set<std::unique_ptr<Entity>> entities;
         std::set<Entity*> entities;
         std::string status1, status2, status3;
 
         bool borderCollidable = true;
         Controller *theController = nullptr;
     public:
+        virtual ~Model();
+
         const State getState();
         void addEntity(Entity *e);
         void addEntity(UserControlledEntity *e);
@@ -27,14 +28,11 @@ namespace cs246e {
         void setBorderCollidable(bool tf) { borderCollidable = tf; }
 
         void init(Controller *c);
-        void update();
+        bool update(); // returns if we should stop or not
 
+        virtual void notify(int s) = 0;
     protected:
-        int flag;
-    public: 
-        void setFlag(int f) {flag = f;}
-    protected:
-        virtual void customUpdate() {};
+        virtual bool customUpdate() {return true;};
         virtual void customInit() {}
     private:
         void removeMarkedEntities();

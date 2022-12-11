@@ -8,7 +8,10 @@ EntityWithHealth::EntityWithHealth(int t, float x, float y, int height,
 
 void EntityWithHealth::addHealth(int x) {
     health += x;
-    if (health <= 0) markToRemove();
+    if (health <= 0) {
+        markToRemove();
+        notify(ENEMYDESTROYED);
+    }
 }
 
 void EntityWithHealth::collideInto(Entity &e) {

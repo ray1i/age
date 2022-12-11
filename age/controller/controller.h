@@ -6,8 +6,10 @@ namespace cs246e {
     protected:
         virtual int action() = 0;
     public:
-        ~Controller() {};
+        virtual ~Controller() {};
+        virtual void init() {};
         virtual int getCurrAction() = 0;
+        virtual void awaitOneInput() = 0;
     };
 }
 

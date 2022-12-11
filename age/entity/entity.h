@@ -9,6 +9,7 @@
 
 namespace cs246e {
     class Model;
+    class UserControlledEntity;
 
     class Entity {
         int type;
@@ -56,8 +57,9 @@ namespace cs246e {
         void downdateForm();
         void downdatePosition();
         void addEntity(Entity *e);
+        void addEntity(UserControlledEntity *e);
         void setStatus(size_t num, std::string s);
-        void setModelFlag(int f);
+        void notify(int s);
     };
 }
 

@@ -7,7 +7,7 @@ namespace cs246e {
     Entity::Entity(int t, float x, float y, int height,
         std::vector<EntityForm> forms, std::vector<Movement> movements):
         type{t}, x{x}, y{y}, height{height},
-        forms{forms}, movements{movements} {}
+        forms{forms}, formIndex{0}, movements{movements} {}
 
     const EntityForm Entity::getCurrForm() const {
         EntityForm form = forms[formIndex];
@@ -23,13 +23,17 @@ namespace cs246e {
     const bool Entity::collidesWith(const Entity *e) const {
         if (this == e) return false;
         if (e->getHeight() != height) return false;
-        for (const auto &myCell: getCurrForm().theForm) {
-            for (const auto &otherCell: e->getCurrForm().theForm) {
+
+        EntityForm f = getCurrForm();
+        for (const auto &myCell: f.theForm) {
+            EntityForm otherF = e->getCurrForm();
+            for (const auto &otherCell: otherF.theForm) {
                 if (myCell.x == otherCell.x && myCell.y == otherCell.y) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
@@ -88,12 +92,16 @@ namespace cs246e {
         if (theModel) theModel->addEntity(e);
     }
 
+    void Entity::addEntity(UserControlledEntity *e) {
+        if (theModel) theModel->addEntity(e);
+    }
+
     void Entity::setStatus(size_t num, std::string s) {
         if (theModel) theModel->setStatus(num, s);
     }
 
-    void Entity::setModelFlag(int f) {
-        if (theModel) theModel->setFlag(f);
+    void Entity::notify(int s) {
+        if (theModel) theModel->notify(s);
     }
 
     // by default, border blocks movement.

@@ -7,9 +7,10 @@
 namespace cs246e {
     class View {
     public:
-        virtual ~View();
+        virtual ~View() {};
 
         virtual void init() = 0;
+        virtual void end() = 0;
         virtual void drawAll(const State &state) = 0;
     };
 }

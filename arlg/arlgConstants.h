@@ -2,7 +2,10 @@
 #define __ARLG_CONSTANTS_H
 
 enum GameState {
-
+    ENEMYDESTROYED,
+    NEXTLEVEL,
+    WON,
+    LOST
 };
 
 enum EntityType {

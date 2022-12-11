@@ -8,10 +8,8 @@
 namespace cs246e {
     class CursesView: public View {
     public:
-        ~CursesView();
-        CursesView &operator=(CursesView other) = delete;
-
         void init() override;
+        void end() override;
         void drawAll(const State &state) override;
     private:
         void refreshView();

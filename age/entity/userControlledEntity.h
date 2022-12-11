@@ -13,10 +13,9 @@ namespace cs246e {
         virtual ~UserControlledEntity() {};
 
         void update() override;
-        // void downdate() override; // TODO
 
         virtual void handleInput(int action) = 0;
-        void addController(Controller *c);
+        void assignController(Controller *c);
     };
 }
 

@@ -3,10 +3,6 @@
 #include "../entity/entityform.h"
 
 namespace cs246e {
-    CursesView::~CursesView() {
-        endwin();
-    }
-
     void CursesView::init() {
         initscr();
         keypad(stdscr, TRUE);
@@ -14,6 +10,10 @@ namespace cs246e {
         setlocale(LC_ALL, "");
         nodelay(stdscr, true);
         noecho();
+    }
+    
+    void CursesView::end() {
+        endwin();
     }
 
     void CursesView::drawAll(const State &state) {

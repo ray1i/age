@@ -35,19 +35,25 @@ namespace cs246e {
                 update();
                 std::this_thread::sleep_for(std::chrono::milliseconds(TICKLENGTH));
             }
+            end();
         }
 
-        void stop() {gameRunning = false;}
     private:
         void init() {
             theModel->init(theController.get());
             theView->init();
+            theController->init();
             gameRunning = true;
         }
         
         void update() {
-            theModel->update();
+            gameRunning = theModel->update();
             theView->drawAll(theModel->getState());
+        }
+
+        void end() {
+            theController->awaitOneInput();
+            theView->end();
         }
     };
 }

@@ -13,6 +13,7 @@ Player::Player(float x, float y):
 void Player::changeHealth(int x) {
     health += x;
     setStatus(1, "Health: " + std::to_string(health));
+    if (health <= 0) notify(LOST);
 }
 
 void Player::collideInto(Entity &e) {
@@ -43,6 +44,9 @@ void Player::collideInto(Entity &e) {
             break;
         case HEALTH:
             changeHealth(1);
+            break;
+        case EXIT:
+            notify(NEXTLEVEL);
             break;
     }
 }

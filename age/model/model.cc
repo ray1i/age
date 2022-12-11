@@ -1,10 +1,13 @@
 #include "model.h"
 #include "../constants.h"
 
-// REMOVE:
-#include <iostream>
-
 namespace cs246e {
+    Model::~Model() {
+        for (auto e: entities) {
+            delete e;
+        }
+    }
+
     const State Model::getState() {
         return State{entities, status1, status2, status3};
     }
@@ -16,13 +19,15 @@ namespace cs246e {
     }
 
     void Model::addEntity(UserControlledEntity *e) {
-        e->addController(theController);
+        e->assignController(theController);
         entities.insert(e);
         e->assignModel(this);
     }
 
     void Model::clearEntities() {
-        entities.clear();
+        for (auto &e: entities) {
+            e->markToRemove();
+        }
     }
 
     void Model::setStatus(size_t num, std::string s) {
@@ -33,8 +38,10 @@ namespace cs246e {
 
     void Model::removeMarkedEntities() {
         for (auto it = entities.begin(); it != entities.end();) {
-            // std::cout << (*it)->getType() << " " << (*it)->isToRemove() << std::endl;
-            if ((*it)->isToRemove()) it = entities.erase(it);
+            if ((*it)->isToRemove()) {
+                delete *it;
+                it = entities.erase(it);
+            }
             else ++it;
         }
     }
@@ -46,17 +53,20 @@ namespace cs246e {
     }
 
     void Model::performEntityCollisions() {
-        for (auto &e: entities) {
+        std::set<Entity*> oldEntities = entities;
+
+        for (auto &e: oldEntities) {
             // check collision with border
             if (borderCollidable) {
-                if (e->getCurrForm().collidesWithBorder(NORTH)) e->collideIntoBorder(NORTH);
-                if (e->getCurrForm().collidesWithBorder(EAST)) e->collideIntoBorder(EAST);
-                if (e->getCurrForm().collidesWithBorder(SOUTH)) e->collideIntoBorder(SOUTH);
-                if (e->getCurrForm().collidesWithBorder(WEST)) e->collideIntoBorder(WEST);
+                EntityForm f = e->getCurrForm();
+                if (f.collidesWithBorder(NORTH)) e->collideIntoBorder(NORTH);
+                if (f.collidesWithBorder(EAST)) e->collideIntoBorder(EAST);
+                if (f.collidesWithBorder(SOUTH)) e->collideIntoBorder(SOUTH);
+                if (f.collidesWithBorder(WEST)) e->collideIntoBorder(WEST);
             }
             
             // check collisions with other entities
-            for (auto &eToCheck: entities) {
+            for (auto &eToCheck: oldEntities) {
                 if (e->collidesWith(eToCheck)) {
                     e->collideInto(*eToCheck);
                 }
@@ -69,10 +79,10 @@ namespace cs246e {
         customInit();
     }
 
-    void Model::update() {
+    bool Model::update() {
         removeMarkedEntities();
         updateAllEntities();
         performEntityCollisions();
-        customUpdate();
+        return customUpdate();
     }
 }

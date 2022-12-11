@@ -11,7 +11,9 @@ namespace cs246e {
         int action() override;
     public:
         CursesController();
-        ~CursesController() {};
+        void init() override;
+        virtual ~CursesController() {};
+        void awaitOneInput() override;
     };
 }
 
