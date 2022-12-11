@@ -18,6 +18,6 @@ void Walker::update() {
         float theX = tempX <= -1 ? -baseSpeed : tempX >= 1 ? 0.05 : 0;
         float theY = tempY <= -1 ? -baseSpeed : tempY >= 1 ? 0.05 : 0;
 
-        setMovement(std::vector<Movement>{Movement{theX, theY}});
+        setMovements(std::vector<Movement>{Movement{theX, theY}});
     }
 }

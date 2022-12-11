@@ -36,11 +36,12 @@ namespace cs246e {
         const float getY() const { return y; }
         const int getHeight() const { return height; }
         const EntityForm getCurrForm() const;
+        const std::vector<Movement> getMovements() const { return movements; }
         const bool isToRemove() const { return toRemove; }
 
         // setters:
         void move(float x, float y);
-        void setMovement(std::vector<Movement> newMovements) {movements = newMovements;}
+        void setMovements(std::vector<Movement> newMovements) {movements = newMovements;}
         void assignModel(Model *m) { theModel = m; }
         void markToRemove() { toRemove = true; }
 
