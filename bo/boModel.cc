@@ -28,14 +28,7 @@ void BoModel::newLevel() {
 
     for (size_t y = 5; y < 5 + 4*level; y += 4) {
         for (size_t x = 5; x < COLUMNS - 8; x += 8) {
-            Block *b1 = new Block(BLOCKSIDE, x, y);
-            Block *b2 = new Block(BLOCKBOTTOM, x+1, y);
-            b1->assignOther(b2);
-            b2->assignOther(b1);
-
-            addEntity(b1);
-            addEntity(b2);
-
+            addEntity(new Block(x, y));
             ++remainingBlocks;
         }
     }

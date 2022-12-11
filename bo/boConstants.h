@@ -14,8 +14,7 @@ enum GameState {
 enum EntityType {
     PADDLE,
     BALL,
-    BLOCKSIDE,
-    BLOCKBOTTOM,
+    BLOCK,
     POWERUP
 };
 

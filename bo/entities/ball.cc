@@ -16,15 +16,8 @@ void Ball::collideInto(Entity &e) {
                 setMovements(std::vector<Movement>{Movement{0.3f*newSlope, -0.3}});
             }
             break;
-        case BLOCKSIDE:
-            // call the other collision ourselves, since downdate will change position
-            e.collideInto(*this);
-            downdate();
-            reflectX();
-            break;
-        case BLOCKBOTTOM:
-            e.collideInto(*this);
-            downdate();
+        case BLOCK:
+            // downdate();
             reflectY();
             break;
     }
