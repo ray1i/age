@@ -10,7 +10,7 @@ void BoModel::customInit() {
     std::string startLevel;
     std::cout << "Which level to start at? ";
     std::cin >> startLevel;
-    if (0 < std::stoi(startLevel) && std::stoi(startLevel) <= 3)
+    if (0 < std::stoi(startLevel) && std::stoi(startLevel) <= 4)
         level = std::stoi(startLevel);
     
     newLevel();
@@ -26,10 +26,15 @@ void BoModel::newLevel() {
     addEntity(new Ball());
     ballsCount = 1;
 
-    for (size_t y = 5; y < 5 + 4*level; y += 4) {
-        for (size_t x = 5; x < COLUMNS - 8; x += 8) {
-            addEntity(new Block(x, y));
-            ++remainingBlocks;
+    if (level == 4) {
+        addEntity(new Block(COLUMNS / 2 - 3, 10));
+        ++remainingBlocks;
+    } else {
+        for (size_t y = 5; y < 5 + 4*level; y += 4) {
+            for (size_t x = 5; x < COLUMNS - 8; x += 8) {
+                addEntity(new Block(x, y));
+                ++remainingBlocks;
+            }
         }
     }
 

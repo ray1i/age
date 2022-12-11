@@ -1,9 +1,9 @@
-all: arlgexec boexec junkexec
+all: game1 game2 junkexec
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -lncurses -g
 DEPENDS = ${OBJECTS:.o=.d}
 
-EXEC1 = arlgexec
+EXEC1 = game1
 OBJECTS1 = arlg.o \
 		age/engine.o age/controller/cursesController.o age/controller/controller.o \
 		age/view/cursesView.o age/view/view.o \
@@ -16,7 +16,7 @@ OBJECTS1 = arlg.o \
 ${EXEC1}: ${OBJECTS1}
 	${CXX} ${OBJECTS1} ${GIVEN} -o ${EXEC1} ${CXXFLAGS}
 
-EXEC2 = boexec
+EXEC2 = game2
 OBJECTS2 = bo.o \
 		age/engine.o age/controller/cursesController.o age/controller/controller.o \
 		age/view/cursesView.o age/view/view.o \
