@@ -5,9 +5,9 @@
 
 namespace cs246e {
     Entity::Entity(int t, float x, float y, int height,
-        std::vector<EntityForm> forms, size_t formIndex, std::vector<Movement> movements):
+        std::vector<EntityForm> forms, std::vector<Movement> movements):
         type{t}, x{x}, y{y}, height{height},
-        forms{forms}, formIndex{formIndex}, movements{movements} {}
+        forms{forms}, movements{movements} {}
 
     const EntityForm Entity::getCurrForm() const {
         EntityForm form = forms[formIndex];
@@ -60,8 +60,11 @@ namespace cs246e {
 
     void Entity::downdateForm() {
         // update entity form
-        --formIndex;
-        if (formIndex < 0) formIndex = forms.size() - 1;
+        if (formIndex == 0) {
+            formIndex = forms.size() - 1;
+        } else {
+            --formIndex;
+        }
    }
 
     void Entity::downdatePosition() {
@@ -73,9 +76,8 @@ namespace cs246e {
 
         // check if entity if offscreen
         if (!getCurrForm().offScreen()) timeOffScreen = 0;
-        if (timeOffScreen <= MAXTICKSOFFSCREEN) toRemove = false; // replace with ..
+        if (timeOffScreen <= MAXTICKSOFFSCREEN) toRemove = false;
     }
-
 
     void Entity::downdate() {
         downdateForm();
@@ -84,6 +86,14 @@ namespace cs246e {
 
     void Entity::addEntity(Entity *e) {
         if (theModel) theModel->addEntity(e);
+    }
+
+    void Entity::setStatus(size_t num, std::string s) {
+        if (theModel) theModel->setStatus(num, s);
+    }
+
+    void Entity::setModelFlag(int f) {
+        if (theModel) theModel->setFlag(f);
     }
 
     // by default, border blocks movement.

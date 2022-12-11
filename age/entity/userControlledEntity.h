@@ -9,7 +9,7 @@ namespace cs246e {
         Controller *theController = nullptr;
     public:
         UserControlledEntity(int t, float x, float y, int height,
-            std::vector<EntityForm> forms, size_t formIndex, std::vector<Movement> movements);
+            std::vector<EntityForm> forms, std::vector<Movement> movements);
         virtual ~UserControlledEntity() {};
 
         void update() override;

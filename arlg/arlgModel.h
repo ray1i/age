@@ -4,10 +4,12 @@
 #include "../age/model/model.h"
 
 class ArlgModel: public cs246e::Model {
-public:
+    size_t level = 1;
+
     void customInit() override;
-protected:
     // void customUpdate() override;
+private:
+    void newLevel();
 };
 
 #endif

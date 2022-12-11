@@ -1,7 +1,7 @@
 #ifndef __BULLET_H
 #define __BULLET_H
 
-#include "../age/entity/entity.h"
+#include "../../age/entity/entity.h"
 
 class Bullet: public cs246e::Entity {
 public:

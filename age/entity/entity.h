@@ -26,7 +26,7 @@ namespace cs246e {
         Model *theModel = nullptr;
     public:
         Entity(int t, float x, float y, int height,
-            std::vector<EntityForm> forms, size_t formIndex, std::vector<Movement> movements);
+            std::vector<EntityForm> forms, std::vector<Movement> movements);
         virtual ~Entity() {};
 
         // getters:
@@ -39,6 +39,7 @@ namespace cs246e {
 
         // setters:
         void move(float x, float y);
+        void setMovement(std::vector<Movement> newMovements) {movements = newMovements;}
         void assignModel(Model *m) { theModel = m; }
         void markToRemove() { toRemove = true; }
 
@@ -55,6 +56,8 @@ namespace cs246e {
         void downdateForm();
         void downdatePosition();
         void addEntity(Entity *e);
+        void setStatus(size_t num, std::string s);
+        void setModelFlag(int f);
     };
 }
 

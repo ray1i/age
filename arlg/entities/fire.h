@@ -1,7 +1,7 @@
 #ifndef __FIRE_H
 #define __FIRE_H
 
-#include "../age/entity/entity.h"
+#include "../../age/entity/entity.h"
 
 class Bullet;
 

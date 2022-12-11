@@ -1,6 +1,9 @@
 #include "model.h"
 #include "../constants.h"
 
+// REMOVE:
+#include <iostream>
+
 namespace cs246e {
     const State Model::getState() {
         return State{entities, status1, status2, status3};
@@ -18,6 +21,10 @@ namespace cs246e {
         e->assignModel(this);
     }
 
+    void Model::clearEntities() {
+        entities.clear();
+    }
+
     void Model::setStatus(size_t num, std::string s) {
         if (num == 0) status1 = s;
         else if (num == 1) status2 = s;
@@ -26,6 +33,7 @@ namespace cs246e {
 
     void Model::removeMarkedEntities() {
         for (auto it = entities.begin(); it != entities.end();) {
+            // std::cout << (*it)->getType() << " " << (*it)->isToRemove() << std::endl;
             if ((*it)->isToRemove()) it = entities.erase(it);
             else ++it;
         }
@@ -37,7 +45,6 @@ namespace cs246e {
         }
     }
 
-    // CURRENTLY DOESN'T CHECK OUTSIDE BOUNDS
     void Model::performEntityCollisions() {
         for (auto &e: entities) {
             // check collision with border
