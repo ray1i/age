@@ -12,7 +12,7 @@ void ArlgModel::customInit() {
     std::string startLevel;
     std::cout << "Which level to start at? ";
     std::cin >> startLevel;
-    if (0 < std::stoi(startLevel) && std::stoi(startLevel) <= 6)
+    if (0 < std::stoi(startLevel) && std::stoi(startLevel) <= 7)
         level = std::stoi(startLevel);
     
     newLevel();
@@ -50,18 +50,29 @@ void ArlgModel::newLevel() {
     theExit = e;
     filled[y][x] = true;
 
-    // spawn fire:
-    for (size_t i = 0; i < level; ++i) {
-        while (filled[y][x]) {
-            x = rand() % filledCols;
-            y = rand() % filledRows;
+    if (level < 7) {
+        // spawn fire:
+        for (size_t i = 0; i < level; ++i) {
+            while (filled[y][x]) {
+                x = rand() % filledCols;
+                y = rand() % filledRows;
+            }
+            addEntity(new Fire(x*4 + 1, y*4 + 1));
+            filled[y][x] = true;
         }
-        addEntity(new Fire(x*4 + 1, y*4 + 1));
-        filled[y][x] = true;
-    }
 
-    // spawn enemies:
-    for (size_t i = 0; i < level + 4; ++i) {
+        // spawn enemies:
+        for (size_t i = 0; i < level + 4; ++i) {
+            while (filled[y][x]) {
+                x = rand() % filledCols;
+                y = rand() % filledRows;
+            }
+            addEntity(new Walker(x*4 + 1, y*4 + 1, p));
+            filled[y][x] = true;
+
+            ++remainingEnemies;
+        }
+    } else {
         while (filled[y][x]) {
             x = rand() % filledCols;
             y = rand() % filledRows;

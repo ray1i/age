@@ -1,4 +1,5 @@
-all: game1 game2 junkexec
+# all: game1 game2 junkexec
+all: game1 game2
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -lncurses -g
 DEPENDS = ${OBJECTS:.o=.d}
@@ -28,16 +29,16 @@ OBJECTS2 = bo.o \
 ${EXEC2}: ${OBJECTS2}
 	${CXX} ${OBJECTS2} ${GIVEN} -o ${EXEC2} ${CXXFLAGS}
 
-EXEC3 = junkexec
-OBJECTS3 = junk.o \
-		age/engine.o age/controller/cursesController.o age/controller/controller.o \
-		age/view/cursesView.o age/view/view.o \
-		age/model/model.o age/entity/entity.o age/entity/userControlledEntity.o \
-		junk/junkController.o junk/junkModel.o \
-		junk/entities/player.o junk/entities/exit.o
+# EXEC3 = junkexec
+# OBJECTS3 = junk.o \
+# 		age/engine.o age/controller/cursesController.o age/controller/controller.o \
+# 		age/view/cursesView.o age/view/view.o \
+# 		age/model/model.o age/entity/entity.o age/entity/userControlledEntity.o \
+# 		junk/junkController.o junk/junkModel.o \
+# 		junk/entities/player.o junk/entities/exit.o
 
-${EXEC3}: ${OBJECTS3}
-	${CXX} ${OBJECTS3} ${GIVEN} -o ${EXEC3} ${CXXFLAGS}
+# ${EXEC3}: ${OBJECTS3}
+# 	${CXX} ${OBJECTS3} ${GIVEN} -o ${EXEC3} ${CXXFLAGS}
 
 -include ${DEPENDS}
 
